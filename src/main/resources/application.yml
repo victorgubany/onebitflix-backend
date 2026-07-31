@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: onebitflix-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/onebitflix
+    username: postgres
+    password: "1234"
+  jpa:
+    hibernate:
+      ddl-auto : update
