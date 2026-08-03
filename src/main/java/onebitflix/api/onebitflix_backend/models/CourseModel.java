@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "course")
+@Table(name = "courses")
 public class CourseModel {
 
     @Id
@@ -20,7 +20,8 @@ public class CourseModel {
 
     private Boolean featured;
 
-    private Integer category_id;
+    @Column(name = "category_id")
+    private Integer categoryId;
 
     private Date created_at;
 
@@ -66,12 +67,12 @@ public class CourseModel {
         this.featured = featured;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Date getCreated_at() {

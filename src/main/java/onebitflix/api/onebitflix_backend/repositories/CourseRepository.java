@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CourseRepository extends JpaRepository<CourseModel, Integer> {
 
+    List<CourseModel> findByCategoryId(Integer categoryId);
+
 }

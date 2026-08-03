@@ -2,8 +2,11 @@ package onebitflix.api.onebitflix_backend.services;
 
 import onebitflix.api.onebitflix_backend.dto.CategoryByIdDto;
 import onebitflix.api.onebitflix_backend.dto.CategoryPaginationDto;
+import onebitflix.api.onebitflix_backend.dto.CourseDto;
 import onebitflix.api.onebitflix_backend.models.CategoryModel;
+import onebitflix.api.onebitflix_backend.models.CourseModel;
 import onebitflix.api.onebitflix_backend.repositories.CategoryRepository;
+import onebitflix.api.onebitflix_backend.repositories.CourseRepository;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +19,11 @@ import java.util.List;
 public class CategoryService {
 
     private CategoryRepository categoryRepository;
+    private CourseRepository courseRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, CourseRepository courseRepository) {
         this.categoryRepository = categoryRepository;
+        this.courseRepository = courseRepository;
     }
 
     public CategoryPaginationDto searchAll(Integer page, Integer perPage){
@@ -42,11 +47,21 @@ public class CategoryService {
             System.out.println("nao achou");
         }
 
+        var courses = courseRepository.findByCategoryId(categorie.getId());
+
+        var coursesDto = courses.stream()
+                .map(course -> new CourseDto(
+                        course.getId(),
+                        course.getName(),
+                        course.getSynopsis(),
+                        course.getThumbnail_url()
+                ))
+                .toList();
 
         return new CategoryByIdDto(
                 categorie.getId(),
                 categorie.getName(),
-                null
+                coursesDto
         );
     }
 }
