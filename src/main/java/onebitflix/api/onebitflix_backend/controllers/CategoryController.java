@@ -1,6 +1,7 @@
 package onebitflix.api.onebitflix_backend.controllers;
 
 
+import onebitflix.api.onebitflix_backend.dto.CategoryByIdDto;
 import onebitflix.api.onebitflix_backend.dto.CategoryPaginationDto;
 import onebitflix.api.onebitflix_backend.models.CategoryModel;
 import onebitflix.api.onebitflix_backend.repositories.CategoryRepository;
@@ -30,9 +31,12 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Integer> getSpecific(@PathVariable Integer id){
+    public ResponseEntity<CategoryByIdDto> getSpecific(@PathVariable Integer id){
         //TODO get specific courses of a category
-        return ResponseEntity.ok(id);
+
+
+        CategoryByIdDto category = categoryService.searchSpecific(id);
+        return ResponseEntity.ok(category);
     }
 
 }

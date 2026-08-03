@@ -1,5 +1,6 @@
 package onebitflix.api.onebitflix_backend.services;
 
+import onebitflix.api.onebitflix_backend.dto.CategoryByIdDto;
 import onebitflix.api.onebitflix_backend.dto.CategoryPaginationDto;
 import onebitflix.api.onebitflix_backend.models.CategoryModel;
 import onebitflix.api.onebitflix_backend.repositories.CategoryRepository;
@@ -30,6 +31,22 @@ public class CategoryService {
                 page,
                 perPage,
                 pageResult.getTotalElements()
+        );
+    }
+
+    public CategoryByIdDto searchSpecific(Integer id){
+
+        var categorie = categoryRepository.findById(id).orElse(null);
+
+        if(categorie == null){
+            System.out.println("nao achou");
+        }
+
+
+        return new CategoryByIdDto(
+                categorie.getId(),
+                categorie.getName(),
+                null
         );
     }
 }
