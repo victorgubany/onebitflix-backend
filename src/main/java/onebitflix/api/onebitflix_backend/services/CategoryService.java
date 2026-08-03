@@ -44,7 +44,7 @@ public class CategoryService {
         var categorie = categoryRepository.findById(id).orElse(null);
 
         if(categorie == null){
-            System.out.println("nao achou");
+            System.out.println("nao achou"); // Todo fazer erro quando nao achar categoria(tratamento)
         }
 
         var courses = courseRepository.findByCategoryId(categorie.getId());
